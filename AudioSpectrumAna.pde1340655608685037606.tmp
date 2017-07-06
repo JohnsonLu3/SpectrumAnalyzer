@@ -1,0 +1,32 @@
+  import processing.sound.*;
+
+FFT fft;
+AudioIn in;
+int bands = 512;
+float[] spectrum = new float[bands];
+
+void setup() {
+  size(1000, 500);
+  background(255);
+fft = new FFT(this, bands);
+in = new AudioIn(this, 0);
+  
+  // start the Audio Input
+  in.start();
+  
+  // patch the AudioIn
+  fft.input(in);
+}      
+
+void draw() { 
+  background(255);
+  fft.analyze(spectrum);
+
+  for(int i = 0; i < bands; i++){
+    if(spectrum[i] > 0){
+      noStroke();
+      fill(156 - spectrum[i]/2, 238  - spectrum[i]/.02, 191  - spectrum[i]/.02);
+      rect(i*10, spectrum[i], 10, spectrum[i]*height*5+12);
+    }
+  } 
+}
