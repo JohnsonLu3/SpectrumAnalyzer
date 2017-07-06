@@ -13,9 +13,9 @@ int frameReset = 0;
 int mouseCount = 0;
 int types = 1;
 
-int R = 156;
-int G = 238;
-int B = 191;
+int R = 221;
+int G = 4;
+int B = 77;
 
 void setup() {
   size(1080, 500);
@@ -37,16 +37,18 @@ void draw() {
   fft.analyze(spectrum);
   
   if(colorShift){
-    B++;
-    G += 2;
+    //B++;
+    //G++;
+    R+= 2;
   }else{
-    B--;
-    G -= 2;
+    //B--;
+    //G--;
+    R-= 2;
   }
   
-  if(B > 240){
+  if( R > 255 ){
     colorShift = false;
-  }else if(B < 25){
+  }else if( R < 40){
     colorShift = true;
   }
   
